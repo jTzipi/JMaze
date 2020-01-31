@@ -17,7 +17,8 @@
 
 package earth.eu.jtzipi.jmaze.ui.ui;
 
-import earth.eu.jtzipi.jmaze.core.algo.IPlantable;
+
+import earth.eu.jtzipi.jmaze.core.algo.Algos;
 import earth.eu.jtzipi.jmaze.core.cell.ICell2D;
 import earth.eu.jtzipi.jmaze.core.cell.ICell2DQuad;
 import earth.eu.jtzipi.jmaze.core.grid.GridQuad2D;
@@ -41,11 +42,12 @@ import java.util.List;
 public class MazePane extends Pane {
 
 
-    private static final int ROW_DEF = 14;
-    private static final int COLUMN_DEF = 12;
+    // private static final int ROW_DEF = 14;
+    // private static final int COLUMN_DEF = 12;
+
     private final IntegerProperty fxRowProp = new SimpleIntegerProperty();
     private final IntegerProperty fxColumnProp = new SimpleIntegerProperty();
-    private final ObjectProperty<IPlantable<IGrid2D<? extends ICell2D>>> fxPlantProp = new SimpleObjectProperty<>();
+    private final ObjectProperty<Algos> fxPlantProp = new SimpleObjectProperty<>();
     private IGrid2D<? extends ICell2D> grid;    // grid
 
 
@@ -53,11 +55,20 @@ public class MazePane extends Pane {
 
     }
 
-
-    void bindAlgo( ObjectProperty<IPlantable<IGrid2D<? extends ICell2D>>> algoProp ) {
+    /**
+     * Bind algo to this algo property.
+     *
+     * @param algoProp algo prop
+     */
+    void bindAlgo( ObjectProperty<Algos> algoProp ) {
         this.fxPlantProp.bind( algoProp );
     }
 
+    /**
+     * Bind spinner row value property to this row property .
+     *
+     * @param ip row property
+     */
     void bindRowProperty( final ReadOnlyObjectProperty<Integer> ip ) {
         this.fxRowProp.bind( ip );
     }
@@ -66,6 +77,9 @@ public class MazePane extends Pane {
         this.fxColumnProp.bind( ip );
     }
 
+    /**
+     * Create a new grid.
+     */
     void updateMaze() {
         getChildren().clear();
         this.grid = GridQuad2D.of( fxRowProp.getValue(), fxColumnProp.getValue() );
@@ -82,13 +96,21 @@ public class MazePane extends Pane {
         }
     }
 
+    /**
+     * Plant a maze.
+     */
     void plant() {
+
+
+        if ( fxPlantProp.getValue() != null ) {
+            fxPlantProp.getValue().plant( grid );
+        }
 
         for ( Node qtile : getChildren() ) {
 
             if ( qtile instanceof QuadTile ) {
-                qtile = ( QuadTile ) qtile;
-
+                QuadTile<?> qt = ( QuadTile<?> ) qtile;
+                qt.update();
 
             }
 

@@ -17,18 +17,15 @@
 
 package earth.eu.jtzipi.jmaze.ui.ui;
 
-import earth.eu.jtzipi.jmaze.core.algo.AldousBroder;
-import earth.eu.jtzipi.jmaze.core.algo.IPlantable;
-import earth.eu.jtzipi.jmaze.core.algo.Wilson;
-import earth.eu.jtzipi.jmaze.core.cell.ICell2D;
-import earth.eu.jtzipi.jmaze.core.grid.IGrid2D;
+
+import earth.eu.jtzipi.jmaze.core.algo.Algos;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 
 public final class MainPane extends BorderPane {
 
 
-    private ComboBox<IPlantable<IGrid2D<? extends ICell2D>>> algoCBox;
+    private ComboBox<Algos> algoCBox;
 
 
     private Button createB;
@@ -54,13 +51,19 @@ public final class MainPane extends BorderPane {
         mp = new MazePane();
 
         algoCBox = new ComboBox<>();
-        algoCBox.getItems().add( new Wilson() );
-        algoCBox.getItems().add( new AldousBroder() );
+        algoCBox.setCellFactory( cb -> new AlgoListCell() );
+
+        algoCBox.getItems().addAll( Algos.values() );
+
+
         plantB = new Button( "plant" );
         createB = new Button( "create" );
 
         rowSpin = new Spinner<>( 1, 1000, 12, 1 );
+        rowSpin.setPrefWidth( 70D );
+
         colSpin = new Spinner<>( 1, 1000, 12, 1 );
+        colSpin.setPrefWidth( 70D );
 
         mp.bindAlgo( algoCBox.valueProperty() );
         mp.bindRowProperty( rowSpin.valueProperty() );
@@ -75,6 +78,7 @@ public final class MainPane extends BorderPane {
         setCenter( mp );
         setTop( ntbar );
 
-        createB.setOnAction( ( ae ) -> mp.updateMaze() );
+        createB.setOnAction( ae -> mp.updateMaze() );
+        plantB.setOnAction( ae -> mp.plant() );
     }
 }

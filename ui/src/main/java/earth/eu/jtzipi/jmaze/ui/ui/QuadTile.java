@@ -61,12 +61,13 @@ public class QuadTile<C extends ICell2DQuad> extends Region {
     }
 
     protected void update() {
-
+        putWalls();
 
     }
 
     private void putWalls() {
 
+        getChildren().clear();
         ICell2D north = cell.getNorth();
         ICell2D west = cell.getWest();
         ICell2D east = cell.getEast();

@@ -15,16 +15,28 @@
  *
  */
 
-package earth.eu.jtzipi.jmaze.core.cell;
+package earth.eu.jtzipi.jmaze.ui.ui;
+
+import earth.eu.jtzipi.jmaze.core.algo.Algos;
+import javafx.scene.control.ListCell;
+
+public class AlgoListCell extends ListCell<Algos> {
 
 
-public interface ICell2DTri extends ICell2D {
+    public AlgoListCell() {
 
-    /**
-     * Whether this cell is upside triangle.
-     *
-     * @return {@code true} if this is upside
-     */
-    boolean isUpside();
+    }
 
+    @Override
+    protected void updateItem( Algos item, boolean empty ) {
+        super.updateItem( item, empty );
+
+        if ( null == item || empty ) {
+
+            setText( "" );
+            return;
+        }
+
+        setText( item.getAlgoName() );
+    }
 }
