@@ -17,17 +17,21 @@
 
 package earth.eu.jtzipi.jmaze.core.algo;
 
-import earth.eu.jtzipi.jmaze.core.cell.ICell2DQuad;
+
+import earth.eu.jtzipi.jmaze.core.cell.ICell2D;
 import earth.eu.jtzipi.jmaze.core.grid.IGrid2D;
 
 /**
  *
  */
-public class RecursiveBacktracker implements IPlantable<IGrid2D<? extends ICell2DQuad>> {
+public class RecursiveBacktracker implements IPlantable<IGrid2D<? extends ICell2D>> {
 
+    public RecursiveBacktracker() {
+
+    }
 
     @Override
-    public void plant( IGrid2D<? extends ICell2DQuad> grid ) {
+    public void plant( IGrid2D<? extends ICell2D> grid ) {
 
     }
 }

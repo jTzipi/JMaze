@@ -23,8 +23,12 @@ import earth.eu.jtzipi.jmaze.ui.PropertiesFX;
 import earth.eu.jtzipi.modules.fx.shape.ShapeBuilder;
 import javafx.beans.binding.NumberBinding;
 import javafx.beans.property.DoubleProperty;
+import javafx.geometry.Insets;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
 
 import java.util.ArrayList;
@@ -39,10 +43,13 @@ public class QuadTile<C extends ICell2DQuad> extends Region {
     private final C cell;
 
     private Background bg;
+    private Background bgMouseover = new Background( new BackgroundFill( Color.rgb( 157, 207, 154 ), CornerRadii.EMPTY, Insets.EMPTY ) );
+
 
     QuadTile( C cell ) {
         this.cell = cell;
         create();
+        init();
         putWalls();
     }
 
@@ -60,7 +67,13 @@ public class QuadTile<C extends ICell2DQuad> extends Region {
         layoutYProperty().bind( posYBind.add( PropertiesFX.FX_GAP_EDGE_NORTH_PROP ) );
     }
 
-    protected void update() {
+    void init() {
+
+        setOnMouseEntered( ev -> onMouseEntered() );
+        setOnMouseExited( ev -> onMouseExited() );
+    }
+
+    void update() {
         putWalls();
 
     }
@@ -97,5 +110,17 @@ public class QuadTile<C extends ICell2DQuad> extends Region {
         }
 
         getChildren().setAll( wall );
+    }
+
+    private void onMouseEntered() {
+
+        PropertiesFX.FX_MOUSE_X_PROP.setValue( cell.getCol() );
+        PropertiesFX.FX_MOUSE_Y_PROP.setValue( cell.getRow() );
+        setBackground( bgMouseover );
+
+    }
+
+    private void onMouseExited() {
+        setBackground( null );
     }
 }

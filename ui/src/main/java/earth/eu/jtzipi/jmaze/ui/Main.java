@@ -17,9 +17,6 @@
 
 package earth.eu.jtzipi.jmaze.ui;
 
-import earth.eu.jtzipi.jmaze.core.cell.ICell2DQuad;
-import earth.eu.jtzipi.jmaze.core.grid.GridQuad2D;
-import earth.eu.jtzipi.jmaze.core.grid.IGrid2D;
 import earth.eu.jtzipi.jmaze.ui.ui.MainPane;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -29,10 +26,9 @@ public class Main extends Application {
     @Override
     public void start( Stage stage ) throws Exception {
 
-
-        IGrid2D<? extends ICell2DQuad> grid = GridQuad2D.of( 12, 10 );
+        // IGrid2D<? extends ICell2DQuad> grid = GridQuad2D.of( 12, 10 );
         // LoggerFactory.getLogger( Main.class ).info( "Grid " + grid.getCells() );
-        final Scene scene = new Scene( MainPane.of(), 700, 500 );
+        final Scene scene = new Scene( MainPane.of(), PropertiesFX.WINDOW_PREF_WIDTH, PropertiesFX.WINDOW_PREF_HEIGHT );
 
         stage.setTitle( "Java Maze Batch Tool" );
         stage.setScene( scene );

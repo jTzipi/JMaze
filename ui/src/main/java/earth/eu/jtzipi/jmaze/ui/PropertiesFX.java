@@ -25,7 +25,11 @@ import javafx.beans.property.*;
 /**
  * Global Shared Properties.
  */
-public class PropertiesFX {
+public final class PropertiesFX {
+
+    public static final double WINDOW_PREF_WIDTH = 1000D;
+    public static final double WINDOW_PREF_HEIGHT = 1000D;
+
 
     /**
      * Min tile length.
@@ -43,6 +47,10 @@ public class PropertiesFX {
      * Main Property every other is derived from.
      */
     public static final DoubleProperty FX_TILE_WIDTH_PROP = new SimpleDoubleProperty( PREF_LEN_TILE );
+
+    public static final DoubleProperty FX_WINDOW_WIDTH_PROP = new SimpleDoubleProperty( WINDOW_PREF_WIDTH );
+
+    public static final DoubleProperty FX_WINDOW_HEIGHT_PROP = new SimpleDoubleProperty( WINDOW_PREF_HEIGHT );
     /**
      * Mouse map grid x position.
      */

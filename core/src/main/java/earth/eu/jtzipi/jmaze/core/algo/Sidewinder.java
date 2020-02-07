@@ -34,37 +34,45 @@ import java.util.List;
  *
  * @author jTzipi
  */
-public class Sidewinder implements IPlantable<IGrid2D<? extends ICell2DQuad>> {
+public class Sidewinder implements IPlantable<IGrid2D<? extends ICell2D>> {
 
 
     @Override
-    public void plant( IGrid2D<? extends ICell2DQuad> grid ) {
+    public void plant( IGrid2D<? extends ICell2D> grid ) {
 
         //
         for ( int r = 0; r < grid.getRows(); r++ ) {
-            ICell2DQuad[] row = grid.getCellsForRow( r );
+            ICell2D[] row = grid.getCellsForRow( r );
             List<ICell2DQuad> cL = new ArrayList<>();
 
             //
-            for ( ICell2DQuad cell : row ) {
-                // get east and north neighbour and check close condition
-                boolean eastEnd = cell.getEast() == ICell2D.Unknown.SINGLETON;
-                boolean northEnd = cell.getNorth() == ICell2D.Unknown.SINGLETON;
+            for ( ICell2D cell : row ) {
 
-                if ( eastEnd || ( !northEnd && Utils.rand( 2 ) == 0 ) ) {
-                    ICell2DQuad toLink = cL.get( Utils.rand( cL.size() ) );
-                    ICell2D north = toLink.getNorth();
-                    if ( north != ICell2D.Unknown.SINGLETON ) {
-                        toLink.link( north, true );
+                if ( cell instanceof ICell2DQuad ) {
+
+                    ICell2DQuad cq = ( ICell2DQuad ) cell;
+                    cL.add( cq );
+                    // get east and north neighbour and check close condition
+                    boolean eastEnd = cq.getEast() == ICell2D.Unknown.SINGLETON;
+                    boolean northEnd = cq.getNorth() == ICell2D.Unknown.SINGLETON;
+
+                    // end of path
+                    if ( eastEnd || ( !northEnd && Utils.rand( 2 ) == 0 ) ) {
+                        ICell2DQuad toLink = cL.get( Utils.rand( cL.size() ) );
+                        ICell2D north = toLink.getNorth();
+                        if ( north != ICell2D.Unknown.SINGLETON ) {
+                            toLink.link( north, true );
+                        }
+                        cL.clear();
+                    } else {
+
+
+                        // we are here not @east end
+                        // so we can safe link to east
+                        cell.link( cq.getEast(), true );
                     }
-                    cL.clear();
-                } else {
 
-                    // we are here not @east end
-                    // so we can safe link to east
-                    cell.link( cell.getEast(), true );
                 }
-
             }
         }
     }

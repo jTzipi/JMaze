@@ -19,6 +19,8 @@ package earth.eu.jtzipi.jmaze.ui.ui;
 
 
 import earth.eu.jtzipi.jmaze.core.algo.Algos;
+import earth.eu.jtzipi.jmaze.ui.PropertiesFX;
+import javafx.beans.binding.NumberBinding;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 
@@ -69,13 +71,22 @@ public final class MainPane extends BorderPane {
         mp.bindRowProperty( rowSpin.valueProperty() );
         mp.bindColumnProperty( colSpin.valueProperty() );
 
+        Label algoLab = new Label( "Algorithm" );
         Label rowLab = new Label( "R" );
         Label columnLab = new Label( "C" );
 
-        ToolBar ntbar = new ToolBar( algoCBox, new Separator(), rowLab, rowSpin, columnLab, colSpin, createB, plantB );
+        ToolBar ntbar = new ToolBar( algoLab, algoCBox, new Separator(), rowLab, rowSpin, columnLab, colSpin, createB, plantB );
+
+        NumberBinding spPrefWidthBind = PropertiesFX.FX_WINDOW_WIDTH_PROP.subtract( 150D );
+        NumberBinding spPrefHeightBind = PropertiesFX.FX_WINDOW_HEIGHT_PROP.subtract( 170D );
+
+        ScrollPane sp = new ScrollPane( mp );
+        sp.setPannable( true );
+        sp.prefWidthProperty().bind( spPrefWidthBind );
+        sp.prefHeightProperty().bind( spPrefHeightBind );
 
 
-        setCenter( mp );
+        setCenter( sp );
         setTop( ntbar );
 
         createB.setOnAction( ae -> mp.updateMaze() );

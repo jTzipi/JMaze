@@ -27,14 +27,34 @@ import java.util.Objects;
  */
 public enum Algos implements IPlantable<IGrid2D<? extends ICell2D>> {
 
+    /**
+     * Aldous Broder.
+     */
     ALDOUS_BRODER( new AldousBroder(), "Aldouse Broder" ),
-    BINARY_TREE( new BinaryTree(), "Binary Tree" );
+    /**
+     * Binary Tree.
+     */
+    BINARY_TREE( new BinaryTree(), "Binary Tree" ),
+    /**
+     *
+     */
+    RESCURSIVE_BACKTRACKER( new RecursiveBacktracker(), "Recursive Backtracker" ),
+
+    /**
+     *
+     */
+    SIDEWINDER( new Sidewinder(), "Sidewinder" ),
+
+    /**
+     *
+     */
+    WILSON( new Wilson(), "Wilson" );
 
 
-    private final IPlantable<IGrid2D<? extends ICell2D>> pl;
+    private final IPlantable<? super IGrid2D<? extends ICell2D>> pl;
     private final String name;
 
-    Algos( IPlantable<IGrid2D<? extends ICell2D>> plantable, String nameStr ) {
+    Algos( IPlantable<? super IGrid2D<? extends ICell2D>> plantable, String nameStr ) {
         this.pl = plantable;
         this.name = nameStr;
     }

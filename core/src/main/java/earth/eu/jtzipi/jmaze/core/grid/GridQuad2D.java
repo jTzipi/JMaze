@@ -124,15 +124,15 @@ public class GridQuad2D extends AbstractPlanarGrid2D<ICell2DQuad> {
     @Override
     public ICell2DQuad getCell( int row, int col ) {
         if ( !isInbound( row, col ) ) {
-            throw new IndexOutOfBoundsException( "[row=row|col=col] out of bounds" );
+            throw new IndexOutOfBoundsException( "[row=" + row + "|col=" + col + "] out of bounds" );
         }
         return grid[row][col];
     }
 
     @Override
     public ICell2DQuad[] getCellsForRow( int row ) {
-        if ( getRows() >= row ) {
-            throw new IllegalArgumentException( new IndexOutOfBoundsException( "row >= getRows" ) );
+        if ( row >= getRows() ) {
+            throw new IllegalArgumentException( new IndexOutOfBoundsException( row + " >= getRows" ) );
         }
 
         return grid[row];
