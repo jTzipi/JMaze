@@ -28,6 +28,14 @@ import java.util.Objects;
  * A cell can be linked and unlinked to other.
  */
 public interface ICell {
+    /**
+     * Minimal row position.
+     */
+    int ROW_MIN = 0;
+    /**
+     * Minimal col position.
+     */
+    int COLUMN_MIN = 0;
 
     /**
      * Return whether this cell is linked to other.
@@ -40,6 +48,21 @@ public interface ICell {
         Objects.requireNonNull( other );
         return getLinkedCells().contains( other );
     } // ;
+
+
+    /**
+     * Return row this cell is located.
+     *
+     * @return row
+     */
+    int getRow();
+
+    /**
+     * Return column of this cell.
+     *
+     * @return column
+     */
+    int getCol();
 
     /**
      * Return all cells linked to this .

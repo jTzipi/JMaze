@@ -15,23 +15,17 @@
  *
  */
 
-package earth.eu.jtzipi.jmaze.core.cell;
+package earth.eu.jtzipi.jmaze.core.grid;
 
-
-public interface ICell2DTri extends ICell2D {
+public interface IMask2D extends IMask {
 
     /**
-     * Whether this cell is upside triangle.
+     * Return whether a cell is masked that is not visitable.
      *
-     * @return {@code true} if this is upside
+     * @param r row
+     * @param c column
+     * @return {@code true} if cell @[r,c] is masked
+     * @throws IndexOutOfBoundsException if {@code r}|{@code c} is out of bound
      */
-    boolean isUpside();
-
-    ICell2D getEast();
-
-    ICell2D getNorth();
-
-    ICell2D getWest();
-
-    ICell2D getSouth();
+    boolean isMasked( int r, int c );
 }

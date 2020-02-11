@@ -20,10 +20,9 @@ package earth.eu.jtzipi.jmaze.core.cell;
 
 import earth.eu.jtzipi.jmaze.core.Dir2D;
 import earth.eu.jtzipi.jmaze.core.IMove2D;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -36,9 +35,12 @@ import java.util.Map;
  *
  * </p>
  */
-public class Cell2DQuad extends AbstractCell2D implements ICell2DQuad {
+public class Cell2DQuad extends AbstractCell implements ICell2DQuad {
+    public static final Comparator<ICell2D> COMP = Comparator.comparing( ICell2D::getRow ).thenComparing( ICell2D::getCol );
 
-    private static final Logger LOGGER = LoggerFactory.getLogger( Cell2DQuad.class );
+
+    //@Override
+    // private static final Logger LOGGER = LoggerFactory.getLogger( Cell2DQuad.class );
     /**
      * Map of neighbours of this cell.
      */

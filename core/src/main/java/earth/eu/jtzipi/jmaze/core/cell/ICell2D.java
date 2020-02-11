@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Basic 'cell' API.
+ * Basic 2D'cell' API.
  * <p>
  * A cell is a location on a grid.
  * A cell knows its location stored as rows and columns.
@@ -32,28 +32,7 @@ import java.util.Map;
  * </p>
  */
 public interface ICell2D extends ICell {
-    /**
-     * Minimal row position.
-     */
-    int ROW_MIN = 0;
-    /**
-     * Minimal col position.
-     */
-    int COLUMN_MIN = 0;
 
-    /**
-     * Return row this cell is located.
-     *
-     * @return row
-     */
-    int getRow();
-
-    /**
-     * Return column of this cell.
-     *
-     * @return column
-     */
-    int getCol();
 
     /**
      * Return all neighbour cells of this cell.
@@ -106,6 +85,9 @@ public interface ICell2D extends ICell {
             return Collections.emptyMap();
         }
 
-
+        @Override
+        public String toString() {
+            return "Unknown Cell2D";
+        }
     }
 }

@@ -20,13 +20,19 @@ package earth.eu.jtzipi.jmaze.core.grid;
 import earth.eu.jtzipi.jmaze.core.cell.ICell;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Root grid interface.
  *
- * @param <C>
+ * @param <C> cell
  */
 public interface IGrid<C extends ICell> {
+    /**
+     * Minimal grid size .
+     */
+    int MIN_SIZE = 1;
 
     /**
      * Return random cell of this grid.
@@ -41,4 +47,22 @@ public interface IGrid<C extends ICell> {
      * @return cells of this grid
      */
     List<C> getCells();
+
+    /**
+     * @param row
+     * @param col
+     * @return
+     */
+    boolean isInbound( int row, int col );
+
+    /**
+     * Return all cells with only one linked cell.
+     *
+     * @return list of cells with only one linked neighbour
+     * @throws NullPointerException if {@linkplain #getCells()} is {@code null}
+     */
+    default List<C> getSingleLinkedCells() {
+        // ;
+        return Objects.requireNonNull( getCells() ).stream().filter( cell -> cell.getLinkedCells().size() == 1 ).collect( Collectors.toList() );
+    }
 }

@@ -50,4 +50,40 @@ public interface ICell2DQuad extends ICell2D {
      */
     ICell2D getSouth();
 
+    /**
+     * Return whether north neighbour is present.
+     *
+     * @return
+     */
+    default boolean isNeighbourNorth() {
+        return getNorth() != Unknown.SINGLETON;
+    }
+
+    /**
+     * Return whether neighbour east is present.
+     *
+     * @return {@code true} if neighbour east is present
+     */
+    default boolean isNeighbourEast() {
+        return getEast() != Unknown.SINGLETON;
+    }
+
+    /**
+     * Return whether  neighbour is present.
+     *
+     * @return {@code true} if neighbour west is present
+     */
+    default boolean isNeighbourWest() {
+        return getWest() != Unknown.SINGLETON;
+    }
+
+    /**
+     * Return whether south neighbour is present.
+     *
+     * @return {@code true} if neighbour south is present
+     */
+    default boolean isNeighbourSouth() {
+        return getSouth() != Unknown.SINGLETON;
+    }
+
 }

@@ -17,21 +17,25 @@
 
 package earth.eu.jtzipi.jmaze.core.cell;
 
+/**
+ * A cell with hexagonal form for 2D grid.
+ */
+public interface ICell2DHex extends ICell2D {
 
-public interface ICell2DTri extends ICell2D {
+    ICell2D getNorthEast();
 
-    /**
-     * Whether this cell is upside triangle.
-     *
-     * @return {@code true} if this is upside
-     */
-    boolean isUpside();
+    ICell2D getNorthWest();
 
-    ICell2D getEast();
+    ICell2D getSouthEast();
+
+    ICell2D getSouthWest();
 
     ICell2D getNorth();
 
-    ICell2D getWest();
-
     ICell2D getSouth();
 }
+
+
+
+
+

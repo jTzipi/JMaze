@@ -20,36 +20,31 @@ package earth.eu.jtzipi.jmaze.core.cell;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class AbstractCell2D implements ICell2D, Comparable<ICell2D> {
+/**
+ * Abstract cell.
+ */
+public abstract class AbstractCell implements ICell {
 
-    public static final Comparator<ICell2D> COMP = Comparator.comparing( ICell2D::getRow ).thenComparing( ICell2D::getCol );
-
-    private static final Logger LOGGER = LoggerFactory.getLogger( AbstractCell2D.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger( AbstractCell.class );
 
     final int row;    // row
     final int col;    //
     final List<ICell> linkedCellL;            // linked cells
 
-    AbstractCell2D( final int row, final int column ) {
+    /**
+     *
+     * @param row
+     * @param column
+     */
+    AbstractCell( final int row, final int column ) {
         this.row = row;
         this.col = column;
 
         this.linkedCellL = new LinkedList<>();
-    }
-
-    @Override
-    public int getRow() {
-        return row;
-    }
-
-    @Override
-    public int getCol() {
-        return col;
     }
 
     @Override
@@ -61,6 +56,18 @@ public abstract class AbstractCell2D implements ICell2D, Comparable<ICell2D> {
     public List<ICell> getLinkedCells() {
         return this.linkedCellL;
     }
+
+
+    @Override
+    public int getRow() {
+        return row;
+    }
+
+    @Override
+    public int getCol() {
+        return col;
+    }
+
 
     @Override
     public void link( ICell cell, boolean bidiProp ) {
@@ -93,8 +100,4 @@ public abstract class AbstractCell2D implements ICell2D, Comparable<ICell2D> {
 
     }
 
-    @Override
-    public int compareTo( ICell2D other ) {
-        return COMP.compare( this, other );
-    }
 }

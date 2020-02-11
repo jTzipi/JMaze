@@ -18,9 +18,26 @@
 package earth.eu.jtzipi.jmaze.core.algo;
 
 
-public class MetaInfo {
+public final class MetaInfo {
 
+    /**
+     * maze have bias.
+     */
     boolean biased;
-
-
+    /**
+     * Needs time to finish planting.
+     */
+    boolean slowFinish;
+    /**
+     * Needs time to begin planting.
+     */
+    boolean slowBegin;
+    /**
+     * Twisted.
+     */
+    boolean twisted;
+    /**
+     * Have many d.ends.
+     */
+    boolean manyDends;
 }

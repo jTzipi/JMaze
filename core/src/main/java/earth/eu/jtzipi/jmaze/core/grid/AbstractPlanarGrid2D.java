@@ -28,7 +28,7 @@ import earth.eu.jtzipi.jmaze.core.cell.ICell2D;
  *
  * </p>
  *
- * @param <C>
+ * @param <C> cell
  */
 public abstract class AbstractPlanarGrid2D<C extends ICell2D> implements IGrid2D<C> {
 
@@ -53,6 +53,7 @@ public abstract class AbstractPlanarGrid2D<C extends ICell2D> implements IGrid2D
      * @param col column
      * @return {@code true} if {@code row|col} are inbound
      */
+    @Override
     public boolean isInbound( final int row, final int col ) {
         return row < getRows() && 0 <= row && col < getCols() && 0 <= col;
     }

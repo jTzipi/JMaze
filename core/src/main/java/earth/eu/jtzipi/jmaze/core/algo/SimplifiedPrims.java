@@ -1,3 +1,4 @@
+
 /*
  * Copyright 2020 (c) Tim Langhammer
  *
@@ -22,51 +23,47 @@ import earth.eu.jtzipi.jmaze.core.Utils;
 import earth.eu.jtzipi.jmaze.core.cell.ICell2D;
 import earth.eu.jtzipi.jmaze.core.grid.IGrid2D;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Implementation of 'Recursive Backtracker' algo for 2D cells.
+ * Implementation of "Prim's" simplified algo.
+ *
+ * @author jTzipi
  */
-public class RecursiveBacktracker implements IPlantable<IGrid2D<? extends ICell2D>> {
-
-    public RecursiveBacktracker() {
-
-    }
+public class SimplifiedPrims implements IPlantable<IGrid2D<? extends ICell2D>> {
 
     @Override
     public void plant( IGrid2D<? extends ICell2D> grid ) {
 
-        Deque<ICell2D> deque = new ArrayDeque<>();
 
-        ICell2D rand = grid.getRandomCell();
-        deque.push( rand );
+        List<ICell2D> gadi = new ArrayList<>();
 
-        // while we have cells
-        while ( !deque.isEmpty() ) {
-            // get top cell
-            ICell2D peek = deque.peek();
-            // and look if there are cells unlinked to other
-            List<ICell2D> nbl = peek.getNeighbours()
+        ICell2D randC = grid.getRandomCell();
+
+        gadi.add( randC );
+
+        while ( !gadi.isEmpty() ) {
+
+            ICell2D temp = Utils.randOf( gadi );
+
+            List<ICell2D> unlinkedL = temp.getNeighbours()
                     .values()
                     .stream()
-                    .filter( cell -> cell.getLinkedCells().isEmpty() )
+                    .filter( c -> c.getLinkedCells().isEmpty() )
                     .collect( Collectors.toList() );
 
-            // no unlinked neighbours -> recursive track back
-            if ( nbl.isEmpty() ) {
+            if ( !unlinkedL.isEmpty() ) {
+                ICell2D ulc = Utils.randOf( unlinkedL );
+                temp.link( ulc, true );
+                gadi.add( ulc );
 
-                deque.pop();
             } else {
-
-                ICell2D nb = Utils.randOf( nbl );
-                peek.link( nb, true );
-
-                // append unlinked
-                deque.push( nb );
+                gadi.remove( temp );
             }
         }
     }
+
+
 }

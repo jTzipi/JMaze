@@ -26,22 +26,19 @@ import earth.eu.jtzipi.jmaze.core.cell.ICell2D;
  * @author jTzipi
  */
 public interface IGrid2D<C extends ICell2D> extends IGrid<C> {
-    /**
-     * Minimal grid size .
-     */
-    int MIN_SIZE = 1;
+
 
     /**
      * Return rows of this grid.
      *
-     * @return rows &ge; {@linkplain IGrid2D#MIN_SIZE}
+     * @return rows &ge; {@linkplain IGrid#MIN_SIZE}
      */
     int getRows();
 
     /**
      * Return cols of this grid.
      *
-     * @return cols &ge; {@linkplain IGrid2D#MIN_SIZE}
+     * @return cols &ge; {@linkplain IGrid#MIN_SIZE}
      */
     int getCols();
 

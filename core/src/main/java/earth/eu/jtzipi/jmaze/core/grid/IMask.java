@@ -15,23 +15,9 @@
  *
  */
 
-package earth.eu.jtzipi.jmaze.core.cell;
+package earth.eu.jtzipi.jmaze.core.grid;
+
+public interface IMask {
 
 
-public interface ICell2DTri extends ICell2D {
-
-    /**
-     * Whether this cell is upside triangle.
-     *
-     * @return {@code true} if this is upside
-     */
-    boolean isUpside();
-
-    ICell2D getEast();
-
-    ICell2D getNorth();
-
-    ICell2D getWest();
-
-    ICell2D getSouth();
 }
