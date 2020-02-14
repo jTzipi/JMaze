@@ -27,11 +27,31 @@ public interface ICell2DTri extends ICell2D {
      */
     boolean isUpside();
 
+    /**
+     * Neighbour cell located east.
+     *
+     * @return east neighbour
+     */
     ICell2D getEast();
 
+    /**
+     * Neighbour cell located north if not {@linkplain #isUpside()} .
+     *
+     * @return north neighbour if not upside
+     */
     ICell2D getNorth();
 
+    /**
+     * Neighbour cell located west.
+     *
+     * @return west neighbour
+     */
     ICell2D getWest();
 
+    /**
+     * Neighbour cell located south if {@linkplain #isUpside()}.
+     *
+     * @return south neighbour if upside
+     */
     ICell2D getSouth();
 }

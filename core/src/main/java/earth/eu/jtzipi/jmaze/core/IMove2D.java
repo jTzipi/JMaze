@@ -20,7 +20,7 @@ package earth.eu.jtzipi.jmaze.core;
 /**
  * Move on a two dimensional grid.
  */
-public interface IMove2D {
+public interface IMove2D extends IMove {
     /**
      * Position of x relative to current position.
      *

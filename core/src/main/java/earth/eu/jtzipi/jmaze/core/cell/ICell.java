@@ -71,6 +71,7 @@ public interface ICell {
      */
     List<ICell> getLinkedCells();
 
+
     /**
      * Link a cell to this.
      * <p>

@@ -19,5 +19,24 @@ package earth.eu.jtzipi.jmaze.core;
 
 public interface IMove {
 
+    enum Mode {
+
+        /**
+         * Move denied for this cell.
+         * e.G. you can not move south east on a quadratic cell.
+         */
+        DENIED,
+        /**
+         * Move permitted. That is we have a passage from this node to node in move direction.
+         */
+        PERMITTED,
+
+        /**
+         * Move this way is not allowed due to unknown cell or grid structure.
+         * e.G. you can not move north on a triangle cell if this cell is upward.
+         */
+        UNAPPROACHABLE;
+
+    }
 
 }

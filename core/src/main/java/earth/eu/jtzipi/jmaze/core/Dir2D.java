@@ -18,7 +18,6 @@
 package earth.eu.jtzipi.jmaze.core;
 
 
-import java.util.EnumSet;
 
 /**
  * Implementation of a planar move.
@@ -50,10 +49,6 @@ public enum Dir2D implements IMove2D {
 
     Dir2D( IMove2D move ) {
         this.plane = move;
-    }
-
-    public static EnumSet<Dir2D> get4Neighbourhood() {
-        return EnumSet.of( Dir2D.N, Dir2D.E, Dir2D.W, Dir2D.S );
     }
 
     @Override

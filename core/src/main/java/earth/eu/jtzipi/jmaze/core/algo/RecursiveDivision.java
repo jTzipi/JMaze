@@ -15,33 +15,7 @@
  *
  */
 
-package earth.eu.jtzipi.jmaze.core;
+package earth.eu.jtzipi.jmaze.core.algo;
 
-
-public final class MovePlane implements IMove2D {
-
-    int x;      // new x coordinate
-    int y;      // nex y
-
-
-    MovePlane( int newX, int newY ) {
-
-        this.x = newX;
-        this.y = newY;
-
-    }
-
-    public static MovePlane of( int dX, int dY ) {
-        return new MovePlane( dX, dY );
-    }
-
-    @Override
-    public int xPos() {
-        return x;
-    }
-
-    @Override
-    public int yPos() {
-        return y;
-    }
+public class RecursiveDivision {
 }

@@ -15,33 +15,24 @@
  *
  */
 
-package earth.eu.jtzipi.jmaze.core;
+package earth.eu.jtzipi.jmaze.core.algo;
 
+import earth.eu.jtzipi.jmaze.core.cell.ICell;
 
-public final class MovePlane implements IMove2D {
+import java.util.List;
 
-    int x;      // new x coordinate
-    int y;      // nex y
+/**
+ * API to choose a cell from a list.
+ **/
+public interface ICellChooser {
 
+    /**
+     * Choose a cell from a list.
+     *
+     * @param list list
+     * @param <C>  type
+     * @return
+     */
+    <C extends ICell> C choose( List<C> list );
 
-    MovePlane( int newX, int newY ) {
-
-        this.x = newX;
-        this.y = newY;
-
-    }
-
-    public static MovePlane of( int dX, int dY ) {
-        return new MovePlane( dX, dY );
-    }
-
-    @Override
-    public int xPos() {
-        return x;
-    }
-
-    @Override
-    public int yPos() {
-        return y;
-    }
 }

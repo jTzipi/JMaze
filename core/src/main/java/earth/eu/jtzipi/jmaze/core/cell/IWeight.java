@@ -15,50 +15,24 @@
  *
  */
 
-package earth.eu.jtzipi.jmaze.core;
+package earth.eu.jtzipi.jmaze.core.cell;
 
-/**
- * Moves on a 2D quadratic grid.
- */
-public enum MoveQuad implements IMove2D {
+public interface IWeight<T> {
 
-    /**
-     * Move north.
-     */
-    N( MovePlane.of( -1, 0 ) ),
-    /**
-     * Move east.
-     */
-    E( MovePlane.of( 0, 1 ) ),
-    /**
-     * Move west.
-     */
-    W( MovePlane.of( 0, -1 ) ),
-    /**
-     * Move south.
-     */
-    S( MovePlane.of( 1, 0 ) ),
-    ;
-
-    private IMove2D mp;
+    double INF = Double.POSITIVE_INFINITY;
+    double FREE = 0D;
 
     /**
-     * Move.
+     * Return weight double of traversing path from cell a to cell b.
      *
-     * @param move
+     * @return weight
      */
-    MoveQuad( IMove2D move ) {
-        this.mp = move;
-    }
+    double toDouble();
 
-
-    @Override
-    public int xPos() {
-        return mp.xPos();
-    }
-
-    @Override
-    public int yPos() {
-        return mp.yPos();
-    }
+    /**
+     * Return weight.
+     *
+     * @return weight
+     */
+    T weight();
 }

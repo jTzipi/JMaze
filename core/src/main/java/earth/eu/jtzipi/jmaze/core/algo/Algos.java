@@ -31,10 +31,13 @@ public enum Algos implements IPlantable<IGrid2D<? extends ICell2D>> {
      * Aldous Broder.
      */
     ALDOUS_BRODER( new AldousBroder(), "Aldouse Broder" ),
+
     /**
      * Binary Tree.
      */
     BINARY_TREE( new BinaryTree(), "Binary Tree" ),
+
+    BUND_WITH_DILL( new BundWithDill(), "Bund & Dill" ),
     /**
      *
      */

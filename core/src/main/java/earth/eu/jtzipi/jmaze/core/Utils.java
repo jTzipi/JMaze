@@ -51,6 +51,11 @@ public final class Utils {
         throw new IllegalArgumentException( "size[" + bound + "] <= 0 is  forbidden" );
     }
 
+    public static double randDouble( double bound ) {
+
+        return RANDOM.nextDouble( bound );
+    }
+
     /**
      * @param set
      * @param <C>

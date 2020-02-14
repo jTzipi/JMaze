@@ -21,18 +21,15 @@ package earth.eu.jtzipi.jmaze.core.cell;
 import earth.eu.jtzipi.jmaze.core.Dir2D;
 import earth.eu.jtzipi.jmaze.core.IMove2D;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.EnumMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Quadratic Cell of a cartesian coordinate system.
  * <p>
  * Important:
  * <br>
- * We initialize all neighbours to UNKNOWN to not add them later during grid generation.
- *
+ * We initialize all neighbours to {@link ICell2D.Unknown} to not add them later during grid generation.
+ * We initialize all weights to {@link IWeight#FREE}
  * </p>
  */
 public class Cell2DQuad extends AbstractCell implements ICell2DQuad {
@@ -45,10 +42,12 @@ public class Cell2DQuad extends AbstractCell implements ICell2DQuad {
      * Map of neighbours of this cell.
      */
     private EnumMap<Dir2D, ICell2D> neighbourMap;   // Neighbours of this cell
-
+    public static final Set<? extends IMove2D> MOVE_SET = EnumSet.of( Dir2D.N, Dir2D.E, Dir2D.W );
+    private EnumMap<Dir2D, Double> weightMap;       // weight map
 
     /**
      * Quadratic cell.
+     * Each
      *
      * @param row index row
      * @param col index column
@@ -60,6 +59,11 @@ public class Cell2DQuad extends AbstractCell implements ICell2DQuad {
         this.setNeighbourEast( Unknown.SINGLETON );
         this.setNeighbourWest( Unknown.SINGLETON );
         this.setNeighbourSouth( Unknown.SINGLETON );
+        this.weightMap = new EnumMap<>( Dir2D.class );
+        this.setWeightEast( IWeight.FREE );
+        this.setWeightNorth( IWeight.FREE );
+        this.setWeightWest( IWeight.FREE );
+        this.setWeightSouth( IWeight.FREE );
     }
 
     /**
@@ -104,7 +108,11 @@ public class Cell2DQuad extends AbstractCell implements ICell2DQuad {
         return neighbourMap.getOrDefault( Dir2D.S, Unknown.SINGLETON );
     }
 
-
+    /**
+     * Set neighbour north.
+     *
+     * @param neighbour neighbour
+     */
     public void setNeighbourNorth( ICell2D neighbour ) {
 
         neighbourMap.put( Dir2D.N, neighbour );
@@ -115,14 +123,54 @@ public class Cell2DQuad extends AbstractCell implements ICell2DQuad {
         neighbourMap.put( Dir2D.E, neighbour );
     }
 
+    /**
+     * Set neighbour west.
+     *
+     * @param neighbour neighbour
+     */
     public void setNeighbourWest( ICell2D neighbour ) {
 
         neighbourMap.put( Dir2D.W, neighbour );
     }
 
+    /**
+     * Set neighbour south.
+     *
+     * @param neighbour neighbour
+     */
     public void setNeighbourSouth( ICell2D neighbour ) {
 
         neighbourMap.put( Dir2D.S, neighbour );
+    }
+
+    public void setWeightNorth( double weight ) {
+
+        weightMap.put( Dir2D.N, weight );
+    }
+
+    public void setWeightEast( double weight ) {
+
+        weightMap.put( Dir2D.E, weight );
+    }
+
+    public void setWeightWest( double weight ) {
+
+        weightMap.put( Dir2D.W, weight );
+    }
+
+    public void setWeightSouth( double weight ) {
+
+        weightMap.put( Dir2D.S, weight );
+    }
+
+
+    @Override
+    public <M extends IMove2D> double getWeightForMove( M move ) {
+        if ( !MOVE_SET.contains( move ) ) {
+            throw new IllegalArgumentException( "Move '" + move + "' is not supported" );
+        }
+
+        return weightMap.get( move );
     }
 
     @Override

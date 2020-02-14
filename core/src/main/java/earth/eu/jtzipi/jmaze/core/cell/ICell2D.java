@@ -17,6 +17,7 @@
 
 package earth.eu.jtzipi.jmaze.core.cell;
 
+
 import earth.eu.jtzipi.jmaze.core.IMove2D;
 
 import java.util.Collections;
@@ -42,6 +43,17 @@ public interface ICell2D extends ICell {
      * @return neighbour cells that can be visited
      */
     Map<IMove2D, ICell2D> getNeighbours();
+
+    /**
+     * Weight or cost for visit a neighbour cell.
+     *
+     * @param m   move
+     * @param <M> move
+     * @return weight
+     */
+    default <M extends IMove2D> double getWeightForMove( M m ) {
+        return 0D;
+    }
 
     /**
      * Unknown planar cell.

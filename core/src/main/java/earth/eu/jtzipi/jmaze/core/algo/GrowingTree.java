@@ -17,5 +17,50 @@
 
 package earth.eu.jtzipi.jmaze.core.algo;
 
-public class GrowingTree {
+import earth.eu.jtzipi.jmaze.core.Utils;
+import earth.eu.jtzipi.jmaze.core.cell.ICell2D;
+import earth.eu.jtzipi.jmaze.core.grid.IGrid2D;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class GrowingTree implements IPlantable<IGrid2D<? extends ICell2D>> {
+
+    GrowingTree() {
+
+    }
+
+    @Override
+    public void plant( IGrid2D<? extends ICell2D> grid ) {
+
+        ICell2D rand = grid.getRandomCell();
+
+        List<ICell2D> activL = new ArrayList<>();
+        activL.add( rand );
+
+        while ( !activL.isEmpty() ) {
+
+
+            // TODO: use cell chooser
+            ICell2D cell2D = Utils.randOf( activL );
+
+
+            List<ICell2D> nbL = cell2D.getNeighbours().values().stream().filter( c -> c.getLinkedCells().isEmpty() ).collect( Collectors.toList() );
+
+            // there are unlinked cells
+            // get random and link
+            if ( !nbL.isEmpty() ) {
+                ICell2D link = Utils.randOf( nbL );
+                cell2D.link( link, true );
+                activL.add( link );
+
+            } else {
+                activL.remove( cell2D );
+            }
+        }
+
+    }
+
+
 }
