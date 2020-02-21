@@ -31,14 +31,23 @@ public class Cell2DPolar extends AbstractCell implements ICell2DPolar {
     ICell2DPolar ccw;
     List<ICell2DPolar> outwardL;
 
+    /**
+     * Polar.
+     *
+     * @param row
+     * @param column
+     */
     Cell2DPolar( int row, int column ) {
         super( row, column );
     }
 
     /**
-     * @param row
-     * @param col
-     * @return
+     * Return polar cell for row and column.
+     *
+     * @param row row
+     * @param col column
+     * @return polar cell
+     * @throws IllegalArgumentException if {@code row}|{@code col} &lt; 0
      */
     public static Cell2DPolar of( int row, int col ) {
         if ( 0 > row || 0 > col ) {
@@ -86,5 +95,42 @@ public class Cell2DPolar extends AbstractCell implements ICell2DPolar {
 
     public void setOutwardList( List<ICell2DPolar> outwardL ) {
         this.outwardL = outwardL;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 53;
+        result = 31 * result + Integer.hashCode( getRow() );
+        result = 31 * result + Integer.hashCode( getCol() );
+        result = 31 * result + Integer.hashCode( getClockwise().getCol() );
+        result = 31 * result + Integer.hashCode( getCounterClockwise().getCol() );
+
+        return result;
+    }
+
+    @Override
+    public boolean equals( Object object ) {
+        if ( this == object ) {
+            return true;
+        }
+        if ( !( object instanceof ICell2DPolar ) ) {
+            return false;
+        }
+
+        ICell2DPolar ocq = ( ICell2DPolar ) object;
+
+        return this.getRow() == ocq.getRow() && this.getCol() == ocq.getCol();
+    }
+
+    @Override
+    public String toString() {
+        return "Cell2DPolar{" +
+                "inward=" + inward +
+                ", cw=" + cw +
+                ", ccw=" + ccw +
+                ", outwardL=" + outwardL +
+                ", row=" + row +
+                ", col=" + col +
+                '}';
     }
 }

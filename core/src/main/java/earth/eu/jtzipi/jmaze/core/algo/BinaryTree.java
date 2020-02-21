@@ -33,6 +33,11 @@ import java.util.List;
 public class BinaryTree implements IPlantable<IGrid2D<? extends ICell2D>> {
 
 
+    public BinaryTree() {
+
+    }
+
+
     @Override
     public void plant( IGrid2D<? extends ICell2D> grid2D ) {
 

@@ -81,7 +81,7 @@ public class Ellers implements IPlantable<IGrid2D<? extends ICell2D>> {
     /**
      * Row State.
      */
-    private class RowState {
+    private final class RowState {
 
 
         private int[] rowCells;

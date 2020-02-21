@@ -35,7 +35,7 @@ public final class MainPane extends BorderPane {
     private Spinner<Integer> rowSpin;
     private Spinner<Integer> colSpin;
 
-    private MazePane mp;
+
 
 
     private MainPane() {
@@ -50,12 +50,13 @@ public final class MainPane extends BorderPane {
     }
 
     private void createMainPane() {
-        mp = new MazePane();
-
+        MazePane mp = new MazePane();
+        AviPane aviPane = new AviPane();
         algoCBox = new ComboBox<>();
         algoCBox.setCellFactory( cb -> new AlgoListCell() );
 
         algoCBox.getItems().addAll( Algos.values() );
+        algoCBox.getSelectionModel().select( 3 );
 
 
         plantB = new Button( "plant" );
@@ -66,10 +67,6 @@ public final class MainPane extends BorderPane {
 
         colSpin = new Spinner<>( 1, 1000, 12, 1 );
         colSpin.setPrefWidth( 70D );
-
-        mp.bindAlgo( algoCBox.valueProperty() );
-        mp.bindRowProperty( rowSpin.valueProperty() );
-        mp.bindColumnProperty( colSpin.valueProperty() );
 
         Label algoLab = new Label( "Algorithm" );
         Label rowLab = new Label( "R" );
@@ -89,7 +86,7 @@ public final class MainPane extends BorderPane {
         setCenter( sp );
         setTop( ntbar );
 
-        createB.setOnAction( ae -> mp.updateMaze() );
-        plantB.setOnAction( ae -> mp.plant() );
+        createB.setOnAction( ae -> mp.createMazeTiles( rowSpin.getValue(), colSpin.getValue() ) );
+        plantB.setOnAction( ae -> mp.plant( algoCBox.getValue() ) );
     }
 }

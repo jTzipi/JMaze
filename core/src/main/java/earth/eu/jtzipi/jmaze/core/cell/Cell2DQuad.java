@@ -42,8 +42,11 @@ public class Cell2DQuad extends AbstractCell implements ICell2DQuad {
      * Map of neighbours of this cell.
      */
     private EnumMap<Dir2D, ICell2D> neighbourMap;   // Neighbours of this cell
-    public static final Set<? extends IMove2D> MOVE_SET = EnumSet.of( Dir2D.N, Dir2D.E, Dir2D.W );
     private EnumMap<Dir2D, Double> weightMap;       // weight map
+    /**
+     * Valid move for cell 2D quad.
+     */
+    public static final Set<? extends IMove2D> MOVE_SET = EnumSet.of( Dir2D.N, Dir2D.E, Dir2D.W, Dir2D.S );
 
     /**
      * Quadratic cell.
@@ -184,9 +187,10 @@ public class Cell2DQuad extends AbstractCell implements ICell2DQuad {
     @Override
     public int hashCode() {
         int result = 29;
-        result = 31 * result * Integer.hashCode( getRow() );
-        result = 31 * result * Integer.hashCode( getCol() );
-
+        result = 31 * result + Integer.hashCode( getRow() );
+        result = 31 * result + Integer.hashCode( getCol() );
+        result = 31 * result + Integer.hashCode( getEast().getCol() );
+        result = 31 * result + Integer.hashCode( getWest().getCol() );
         return result;
     }
 

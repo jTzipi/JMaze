@@ -21,6 +21,7 @@ import earth.eu.jtzipi.jmaze.core.cell.ICell2D;
 import earth.eu.jtzipi.jmaze.core.cell.ICell2DQuad;
 import earth.eu.jtzipi.jmaze.ui.PropertiesFX;
 import earth.eu.jtzipi.modules.fx.shape.ShapeBuilder;
+import javafx.animation.FillTransition;
 import javafx.beans.binding.NumberBinding;
 import javafx.beans.property.DoubleProperty;
 import javafx.geometry.Insets;
@@ -30,6 +31,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,8 +44,12 @@ public class QuadTile<C extends ICell2DQuad> extends Region {
 
     private final C cell;
 
-    private Background bg;
-    private Background bgMouseover = new Background( new BackgroundFill( Color.rgb( 157, 207, 154 ), CornerRadii.EMPTY, Insets.EMPTY ) );
+    private Color mouseOverColor = Color.rgb( 122, 122, 254 );
+    private Color bgColor = Color.rgb( 0, 0, 0, 0 );
+
+    private Background bgMouseover = new Background( new BackgroundFill( mouseOverColor, CornerRadii.EMPTY, Insets.EMPTY ) );
+
+    private FillTransition mouseOverEaseT;
 
 
     QuadTile( C cell ) {
@@ -65,6 +71,8 @@ public class QuadTile<C extends ICell2DQuad> extends Region {
 
         layoutXProperty().bind( posXBind.add( PropertiesFX.FX_GAP_EDGE_WEST_PROP ) );
         layoutYProperty().bind( posYBind.add( PropertiesFX.FX_GAP_EDGE_NORTH_PROP ) );
+
+
     }
 
     void init() {
@@ -85,42 +93,53 @@ public class QuadTile<C extends ICell2DQuad> extends Region {
         ICell2D west = cell.getWest();
         ICell2D east = cell.getEast();
         ICell2D south = cell.getSouth();
-        List<Shape> wall = new ArrayList<>();
+        List<Shape> shapeList = new ArrayList<>();
 
         double len = PropertiesFX.FX_TILE_WIDTH_PROP.doubleValue();
 
         if ( !cell.isLinked( north ) ) {
             Shape wallNorth = ShapeBuilder.create().lx( len ).build();
-            wall.add( wallNorth );
+            shapeList.add( wallNorth );
         }
 
         if ( !cell.isLinked( east ) ) {
             Shape eastWall = ShapeBuilder.create().mx( len ).ly( len ).build();
-            wall.add( eastWall );
+            shapeList.add( eastWall );
         }
 
         if ( !cell.isLinked( west ) ) {
             Shape westWall = ShapeBuilder.create().ly( len ).build();
-            wall.add( westWall );
+            shapeList.add( westWall );
         }
 
         if ( !cell.isLinked( south ) ) {
             Shape southWall = ShapeBuilder.create().my( len ).lx( len ).build();
-            wall.add( southWall );
+            shapeList.add( southWall );
         }
 
-        getChildren().setAll( wall );
+        Text t = new Text( "[" + cell.getRow() + " " + cell.getCol() + "]" );
+
+
+        t.setFill( mouseOverColor );
+        t.setLayoutX( 10D );
+        t.setLayoutY( len - 10D );
+
+        shapeList.add( t );
+        getChildren().setAll( shapeList );
     }
 
     private void onMouseEntered() {
 
+        // update mouse x and y grid position
         PropertiesFX.FX_MOUSE_X_PROP.setValue( cell.getCol() );
         PropertiesFX.FX_MOUSE_Y_PROP.setValue( cell.getRow() );
-        setBackground( bgMouseover );
+
 
     }
 
     private void onMouseExited() {
+
+
         setBackground( null );
     }
 }

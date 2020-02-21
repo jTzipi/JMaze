@@ -78,5 +78,8 @@ public class BundWithDill implements IPlantable<IGrid2D<? extends ICell2D>> {
         }
     }
 
-
+    @Override
+    public String toString() {
+        return "BundWithDill@Grid2D>Cell2D";
+    }
 }

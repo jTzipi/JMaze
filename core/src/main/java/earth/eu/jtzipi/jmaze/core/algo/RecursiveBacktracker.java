@@ -52,7 +52,7 @@ public class RecursiveBacktracker implements IPlantable<IGrid2D<? extends ICell2
             List<ICell2D> nbl = peek.getNeighbours()
                     .values()
                     .stream()
-                    .filter( cell -> cell.getLinkedCells().isEmpty() )
+                    .filter( cell -> cell != ICell2D.Unknown.SINGLETON && cell.getLinkedCells().isEmpty() )
                     .collect( Collectors.toList() );
 
             // no unlinked neighbours -> recursive track back
