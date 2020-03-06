@@ -19,6 +19,7 @@ package earth.eu.jtzipi.jmaze.ui.ui;
 
 import earth.eu.jtzipi.jmaze.core.cell.ICell2D;
 import earth.eu.jtzipi.jmaze.core.cell.ICell2DQuad;
+import earth.eu.jtzipi.jmaze.ui.ColorUtils;
 import earth.eu.jtzipi.jmaze.ui.PropertiesFX;
 import earth.eu.jtzipi.modules.fx.shape.ShapeBuilder;
 import javafx.animation.FillTransition;
@@ -48,6 +49,7 @@ public class QuadTile<C extends ICell2DQuad> extends Region {
     private Color bgColor = Color.rgb( 0, 0, 0, 0 );
 
     private Background bgMouseover = new Background( new BackgroundFill( mouseOverColor, CornerRadii.EMPTY, Insets.EMPTY ) );
+
 
     private FillTransition mouseOverEaseT;
 
@@ -134,7 +136,8 @@ public class QuadTile<C extends ICell2DQuad> extends Region {
         PropertiesFX.FX_MOUSE_X_PROP.setValue( cell.getCol() );
         PropertiesFX.FX_MOUSE_Y_PROP.setValue( cell.getRow() );
 
-
+        Color bg = ColorUtils.computeBlue( 0, cell.getCol() * cell.getRow(), 12 * 12 );
+        setBackground( new Background( new BackgroundFill( bg, CornerRadii.EMPTY, Insets.EMPTY ) ) );
     }
 
     private void onMouseExited() {

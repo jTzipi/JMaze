@@ -35,9 +35,6 @@ public final class ColorUtils {
 
     }
 
-    public static Color compute( int redOffset, int greenOffset, int blueOffset, double value, double max ) {
-        return Color.BLUE;
-    }
 
 
     /**
@@ -59,7 +56,7 @@ public final class ColorUtils {
         offset = Utils.clamp( offset, COLOR_OFFSET_MIN, COLOR_OFFSET_MAX );
         value = Utils.clamp( value, 0D, max );
 
-        double percent = percent( value, max );
+        double percent = value / max;
         int blue = offset + ( int ) ( percent * ( COLOR_MAX - offset ) );
 
         return Color.rgb( COLOR_MIN, COLOR_MIN, blue );

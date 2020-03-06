@@ -32,6 +32,7 @@ public final class MainPane extends BorderPane {
 
     private Button createB;
     private Button plantB;
+    private Button setStartCellB;
     private Spinner<Integer> rowSpin;
     private Spinner<Integer> colSpin;
 
@@ -61,6 +62,7 @@ public final class MainPane extends BorderPane {
 
         plantB = new Button( "plant" );
         createB = new Button( "create" );
+        setStartCellB = new Button( "Cell" );
 
         rowSpin = new Spinner<>( 1, 1000, 12, 1 );
         rowSpin.setPrefWidth( 70D );
@@ -72,7 +74,7 @@ public final class MainPane extends BorderPane {
         Label rowLab = new Label( "R" );
         Label columnLab = new Label( "C" );
 
-        ToolBar ntbar = new ToolBar( algoLab, algoCBox, new Separator(), rowLab, rowSpin, columnLab, colSpin, createB, plantB );
+        ToolBar ntbar = new ToolBar( algoLab, algoCBox, new Separator(), rowLab, rowSpin, columnLab, colSpin, createB, plantB, setStartCellB );
 
         NumberBinding spPrefWidthBind = PropertiesFX.FX_WINDOW_WIDTH_PROP.subtract( 150D );
         NumberBinding spPrefHeightBind = PropertiesFX.FX_WINDOW_HEIGHT_PROP.subtract( 170D );

@@ -35,6 +35,7 @@ public class AviPane extends Pane {
     AviPane() {
 
         createAviPane();
+        init();
     }
 
     private void createAviPane() {
@@ -69,4 +70,11 @@ public class AviPane extends Pane {
         clicked.setVisible( false );
 
     }
+
+    private void init() {
+
+
+    }
+
+
 }

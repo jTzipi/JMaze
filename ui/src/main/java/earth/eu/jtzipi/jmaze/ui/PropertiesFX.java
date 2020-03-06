@@ -112,7 +112,7 @@ public final class PropertiesFX {
      */
     public static NumberBinding FX_TILE_HOVER_OFF_Y_BIND;
 
-    private PropertiesFX() {
+    static {
 
         DoubleBinding tileXOffset = FX_TILE_WIDTH_PROP.multiply( FX_MOUSE_X_PROP );
         DoubleBinding tileYOffset = FX_TILE_WIDTH_PROP.multiply( FX_MOUSE_Y_PROP );
@@ -128,4 +128,12 @@ public final class PropertiesFX {
 
 
     }
+
+    private PropertiesFX() {
+
+    }
+
 }
+
+
+// }

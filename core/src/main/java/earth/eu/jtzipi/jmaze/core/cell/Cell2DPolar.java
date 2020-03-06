@@ -125,10 +125,6 @@ public class Cell2DPolar extends AbstractCell implements ICell2DPolar {
     @Override
     public String toString() {
         return "Cell2DPolar{" +
-                "inward=" + inward +
-                ", cw=" + cw +
-                ", ccw=" + ccw +
-                ", outwardL=" + outwardL +
                 ", row=" + row +
                 ", col=" + col +
                 '}';
